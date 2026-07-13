@@ -184,6 +184,34 @@
   }
 
   /* ===================== WISH SECTION ===================== */
+ .glass-card{
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    background: rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+.wish-photo{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid rgba(255,255,255,.7);
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+.glass-card h3{
+    color:white;
+    font-family:'Playfair Display', serif;
+    font-size:1.3rem;
+    margin:0;
+}
   .wish-section{
     min-height: 100vh;
     display:flex;
@@ -238,12 +266,15 @@
     font-weight:600;
   }
   .card-back{
-    background: var(--cream);
-    color: var(--aubergine-deep);
-    transform: rotateY(180deg);
-    font-size: 1.02rem;
-    line-height:1.55;
-  }
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.2);
+    color:white;
+    transform:rotateY(180deg);
+    font-size:1.02rem;
+    line-height:1.6;
+}
   .hint{
     margin-top: 1rem;
     font-size: 0.8rem;
@@ -395,7 +426,10 @@
     <h2 class="section-title" id="wishTitle">Tap the card for your wish</h2>
     <div class="card-flip" id="cardFlip">
       <div class="card-flip-inner">
-        <div class="card-face card-front"> A wish just for you</div>
+        <div class="card-face card-front glass-card">
+    <img src="photo.jpg" alt="Birthday Girl" class="wish-photo">
+    <h3> A Wish Just For You ✨</h3>
+</div>
         <div class="card-face card-back">
           May this new year of yours be filled with laughter that lasts, people who matter, and moments worth remembering. Happy Birthday, Vaishnavi Jadhav — shine on! ✨
         </div>
