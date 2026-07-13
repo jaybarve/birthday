@@ -376,7 +376,9 @@
 </style>
 </head>
 <body>
-
+<audio id="bgMusic" autoplay loop hidden>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
   <section class="hero" id="hero">
     <div class="garland" id="garland"></div>
     <div id="twinkles"></div>
@@ -518,8 +520,25 @@
       });
       setTimeout(() => { c.style.opacity = '0'; }, 700);
       setTimeout(() => c.remove(), 1700);
+
+      
     }
   });
+
+  const music = document.getElementById("bgMusic");
+
+music.play().catch(() => {
+    const startMusic = () => {
+        music.play();
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("touchstart", startMusic);
+        document.removeEventListener("keydown", startMusic);
+    };
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+    document.addEventListener("keydown", startMusic);
+});
 </script>
 </body>
 </html>
