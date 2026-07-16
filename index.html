@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday, Vaishnavi!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,500;0,700;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --aubergine: #2A1830;
@@ -39,6 +39,77 @@
     background: radial-gradient(ellipse at 50% 20%, var(--aubergine) 0%, var(--aubergine-deep) 70%);
     overflow:hidden;
     padding: 2rem 1rem;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 1100px;
+    width: 100%;
+    z-index: 5;
+    padding: 0 1rem;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Modern Glass Frame Container for Home Photo */
+  .hero-photo-wrap {
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 32px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-photo {
+    width: min(260px, 65vw);
+    height: auto;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 992px) {
+    .hero-container {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .hero-content {
+      align-items: flex-start;
+      text-align: left;
+      flex: 1.4;
+      min-width: max-content;
+    }
+    
+    .hero-photo-wrap {
+      flex: 0.8;
+      justify-content: flex-end;
+      padding: 16px;
+    }
+    
+    .hero-photo {
+      width: 320px;
+    }
   }
 
   /* twinkles */
@@ -114,10 +185,12 @@
   .name-wrap{
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: clamp(2.4rem, 9vw, 5.5rem);
-    line-height:1.05;
+    font-size: clamp(2.2rem, 8vw, 5rem);
+    line-height:1.1;
     margin: 0.6rem 0 0.4rem;
+    white-space: nowrap;
   }
+  
   .name-wrap .letter{
     display:inline-block;
     opacity:0;
@@ -298,7 +371,7 @@
   .cake{
     position:relative;
     width: 180px;
-    margin: 2rem auto 1rem;
+    margin: 4rem auto 1rem;
   }
   .tier{
     width:100%;
@@ -309,47 +382,87 @@
   }
   .tier.top{ width:70%; height:44px; margin-left:15%; background: linear-gradient(180deg, var(--gold-soft), var(--gold)); }
   .tier.bottom{ height:58px; }
+  
   .candle{
     position:absolute;
     top:-42px; left:50%;
     transform: translateX(-50%);
     width:8px; height:38px;
-    background: var(--cream);
+    background: linear-gradient(90deg, #fff, var(--cream));
     border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   }
+  .candle::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: 3px;
+    width: 2px; height: 5px;
+    background: #444;
+  }
+
   .flame{
     position:absolute;
-    top:-20px; left:50%;
+    top:-22px; left:50%;
     transform: translateX(-50%);
-    width:14px; height:20px;
-    background: radial-gradient(circle at 50% 30%, #fff6d5, var(--marigold) 60%, transparent 100%);
+    width:16px; height:24px;
+    background: radial-gradient(circle at 50% 80%, #fff 15%, #ffea88 35%, var(--marigold) 60%, rgba(232,116,138,0) 85%);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    animation: flicker 1.4s ease-in-out infinite;
+    animation: pulseFlame 1.2s ease-in-out infinite alternate, flicker 0.15s infinite alternate;
     transform-origin: bottom center;
+    filter: drop-shadow(0 0 10px rgba(242,153,74,0.8));
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.4s ease;
+  }
+
+  @keyframes pulseFlame {
+    0% { transform: translateX(-50%) scale(0.95); }
+    100% { transform: translateX(-50%) scale(1.05); }
   }
   @keyframes flicker{
-    0%,100%{ transform: translateX(-50%) scale(1) rotate(-2deg); }
-    50%{ transform: translateX(-50%) scale(1.08) rotate(2deg); }
+    0%{ transform: translateX(-50%) rotate(-1deg) scaleX(0.98); }
+    100%{ transform: translateX(-50%) rotate(1.5deg) scaleX(1.02); }
   }
-  .cake.blown .flame{
-    opacity:0;
-    transform: translateX(-50%) scale(0.2) rotate(0deg);
-    animation: none;
+
+  .cake.blown .flame {
+    transform: translateX(-50%) scale(0) translateY(-10px);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 transparent);
   }
-  .cake.blown .candle::after{
-    content:'';
-    position:absolute;
-    top:-6px; left:2px;
-    width:4px; height:10px;
-    background: rgba(220,220,220,0.5);
-    border-radius:2px;
-    filter: blur(2px);
-    animation: smoke 1.6s ease-out forwards;
+
+  .candle-wick-ember {
+    position: absolute;
+    top: -4px; left: 3px;
+    width: 2px; height: 2px;
+    background: #ff5500;
+    border-radius: 50%;
+    box-shadow: 0 0 4px #ff5500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
-  @keyframes smoke{
-    0%{ opacity:0.7; transform: translateY(0) scaleX(1); }
-    100%{ opacity:0; transform: translateY(-24px) scaleX(2.2); }
+  .cake.blown .candle-wick-ember {
+    opacity: 1;
+    animation: fadeEmber 2.5s ease-out forwards;
+  }
+  @keyframes fadeEmber {
+    0% { opacity: 1; background: #ff5500; box-shadow: 0 0 4px #ff5500; }
+    50% { opacity: 0.8; background: #aa2200; }
+    100% { opacity: 0; background: #444; }
+  }
+
+  #smokeCanvas {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #confettiCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 100;
   }
 
   .blow-btn{
@@ -386,15 +499,6 @@
   }
   .cake-msg.show{ opacity:1; transform: translateY(0); }
 
-  /* confetti burst */
-  .confetti-piece{
-    position:absolute;
-    width:8px; height:12px;
-    top:50%; left:50%;
-    opacity:0;
-    pointer-events:none;
-  }
-
   .footer-note{
     margin-top: 3rem;
     font-size: 0.85rem;
@@ -407,18 +511,30 @@
 </style>
 </head>
 <body>
-<audio id="bgMusic" autoplay loop hidden>
+<audio id="bgMusic" autoplay loop hidden playsinline>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+  <canvas id="confettiCanvas"></canvas>
+
   <section class="hero" id="hero">
     <div class="garland" id="garland"></div>
     <div id="twinkles"></div>
     <div id="petals"></div>
     <div id="balloons"></div>
 
-    <p class="eyebrow">A little celebration for</p>
-    <h1 class="name-wrap" id="nameWrap" aria-label="Vaishnavi Jadhav"></h1>
-    <p class="tagline">Wishing you a year as bright, warm, and wonderful as you are — happy birthday!</p>
+    <div class="hero-container">
+      <div class="hero-content">
+        <p class="eyebrow">A little celebration for</p>
+        <h1 class="name-wrap" id="nameWrap" aria-label="Vaishnavi Jadhav"></h1>
+        <p class="tagline">Wishing you a year as bright, warm, and wonderful as you are — happy birthday!</p>
+      </div>
+      <!-- Framed cleanly inside a modern Frosted Glass Frame -->
+      <div class="hero-photo-wrap">
+        <img src="new-photo.jpg" alt="Vaishnavi" class="hero-photo">
+      </div>
+    </div>
+    
     <span class="scroll-cue">scroll down ↓</span>
   </section>
 
@@ -441,11 +557,13 @@
   <section class="cake-section">
     <h2 class="section-title in-view">Make it official</h2>
     <div class="cake" id="cake">
-      <div class="candle"></div>
+      <div class="candle">
+        <div class="candle-wick-ember"></div>
+      </div>
       <div class="flame" id="flame"></div>
+      <canvas id="smokeCanvas" width="200" height="150"></canvas>
       <div class="tier top"></div>
       <div class="tier bottom"></div>
-      <div id="confettiHost"></div>
     </div>
     <button class="blow-btn" id="blowBtn"> Blow out the candle</button>
     <p class="cake-msg" id="cakeMsg">Wish made. Happy Birthday, Vaishnavi! 🎉</p>
@@ -525,54 +643,169 @@
   }, { threshold: 0.4 });
   io.observe(wishTitle);
 
-  // Blow out candle + confetti
+  /* ===================== CONFETTI ENGINE ===================== */
+  const confettiCanvas = document.getElementById("confettiCanvas");
+  const ctxConf = confettiCanvas.getContext("2d");
+  let confettiParticles = [];
+  const confettiColors = ['#E8748A', '#E8B34C', '#F3D48A', '#F2994A', '#FBF3E7'];
+
+  function resizeConfettiCanvas() {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeConfettiCanvas);
+  resizeConfettiCanvas();
+
+  class ConfettiParticle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 8 + 5;
+      this.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      this.vx = (Math.random() - 0.5) * 15;
+      this.vy = -(Math.random() * 15 + 10);
+      this.gravity = 0.35;
+      this.drag = 0.98;
+      this.rotation = Math.random() * 360;
+      this.rSpeed = (Math.random() - 0.5) * 10;
+      this.opacity = 1;
+    }
+    update() {
+      this.vx *= this.drag;
+      this.vy += this.gravity;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.rotation += this.rSpeed;
+      if (this.vy > 2) {
+        this.opacity -= 0.006;
+      }
+    }
+    draw() {
+      ctxConf.save();
+      ctxConf.translate(this.x, this.y);
+      ctxConf.rotate((this.rotation * Math.PI) / 180);
+      ctxConf.globalAlpha = Math.max(0, this.opacity);
+      ctxConf.fillStyle = this.color;
+      ctxConf.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+      ctxConf.restore();
+    }
+  }
+
+  /* ===================== SMOKE GENERATION ===================== */
+  const smokeCanvas = document.getElementById("smokeCanvas");
+  const ctxSmoke = smokeCanvas.getContext("2d");
+  let smokeParticles = [];
+
+  class SmokeParticle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 2 + 2;
+      this.maxSize = Math.random() * 25 + 20;
+      this.opacity = 0.5;
+      this.vx = (Math.random() - 0.5) * 0.8; 
+      this.vy = -(Math.random() * 1.2 + 0.6); 
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.size < this.maxSize) this.size += 0.25;
+      this.opacity -= 0.005;
+    }
+    draw() {
+      ctxSmoke.save();
+      ctxSmoke.globalAlpha = Math.max(0, this.opacity);
+      let gradient = ctxSmoke.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+      gradient.addColorStop(0, 'rgba(210, 200, 215, 0.3)');
+      gradient.addColorStop(0.5, 'rgba(190, 180, 195, 0.1)');
+      gradient.addColorStop(1, 'rgba(190, 180, 195, 0)');
+      ctxSmoke.fillStyle = gradient;
+      ctxSmoke.beginPath();
+      ctxSmoke.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctxSmoke.fill();
+      ctxSmoke.restore();
+    }
+  }
+
+  function renderFX() {
+    ctxConf.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    ctxSmoke.clearRect(0, 0, smokeCanvas.width, smokeCanvas.height);
+
+    confettiParticles.forEach((p, idx) => {
+      p.update();
+      p.draw();
+      if (p.opacity <= 0 || p.y > confettiCanvas.height) {
+        confettiParticles.splice(idx, 1);
+      }
+    });
+
+    smokeParticles.forEach((s, idx) => {
+      s.update();
+      s.draw();
+      if (s.opacity <= 0) {
+        smokeParticles.splice(idx, 1);
+      }
+    });
+
+    if (confettiParticles.length > 0 || smokeParticles.length > 0) {
+      requestAnimationFrame(renderFX);
+    }
+  }
+
   const cake = document.getElementById('cake');
   const blowBtn = document.getElementById('blowBtn');
   const cakeMsg = document.getElementById('cakeMsg');
-  const confettiHost = document.getElementById('confettiHost');
-  const confettiColors = ['#E8748A', '#E8B34C', '#F3D48A', '#F2994A', '#FBF3E7'];
 
   blowBtn.addEventListener('click', () => {
     if (cake.classList.contains('blown')) return;
     cake.classList.add('blown');
     cakeMsg.classList.add('show');
 
-    for (let i = 0; i < 30; i++) {
-      const c = document.createElement('div');
-      c.className = 'confetti-piece';
-      c.style.background = confettiColors[i % confettiColors.length];
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 60 + Math.random() * 90;
-      const x = Math.cos(angle) * dist;
-      const y = Math.sin(angle) * dist - 40;
-      const rot = Math.random() * 360;
-      c.style.transition = 'transform 0.9s cubic-bezier(.2,.8,.2,1), opacity 0.9s ease';
-      confettiHost.appendChild(c);
-      requestAnimationFrame(() => {
-        c.style.opacity = '1';
-        c.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-      });
-      setTimeout(() => { c.style.opacity = '0'; }, 700);
-      setTimeout(() => c.remove(), 1700);
+    const flameEl = document.getElementById('flame');
+    const rect = flameEl.getBoundingClientRect();
+    const triggerX = rect.left + rect.width / 2;
+    const triggerY = rect.top + rect.height / 2;
 
-      
+    for (let i = 0; i < 120; i++) {
+      confettiParticles.push(new ConfettiParticle(triggerX, triggerY));
     }
+
+    let smokeCycle = 0;
+    function spawnSmokeWave() {
+      if (smokeCycle < 35) {
+        smokeParticles.push(new SmokeParticle(100, 140));
+        smokeCycle++;
+        setTimeout(spawnSmokeWave, 30);
+      }
+    }
+    spawnSmokeWave();
+    renderFX();
   });
 
+  /* ===================== BACKGROUND MUSIC ===================== */
   const music = document.getElementById("bgMusic");
+  
+  function tryPlayingMusic() {
+    music.play().catch(err => {
+      console.log("Autoplay blocked, awaiting interaction trigger.");
+    });
+  }
 
-music.play().catch(() => {
-    const startMusic = () => {
-        music.play();
-        document.removeEventListener("click", startMusic);
-        document.removeEventListener("touchstart", startMusic);
-        document.removeEventListener("keydown", startMusic);
-    };
+  tryPlayingMusic();
 
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
-    document.addEventListener("keydown", startMusic);
-});
+  const interactionEvents = ["click", "touchstart", "touchend", "keydown"];
+  
+  function startMusicOnInteraction() {
+    music.play().then(() => {
+      interactionEvents.forEach(event => {
+        document.removeEventListener(event, startMusicOnInteraction);
+      });
+    }).catch(e => console.log("Audio unlock retry failed", e));
+  }
+
+  interactionEvents.forEach(event => {
+    document.addEventListener(event, startMusicOnInteraction, { passive: true });
+  });
 </script>
 </body>
 </html>
